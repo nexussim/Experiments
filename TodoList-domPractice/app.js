@@ -8,18 +8,21 @@ let todoList = {
     addTodoCounter: 0,
 
     addTodo: function(todo) {
-        let li = document.createElement('li');
-        ul.appendChild(li);
+        if (todo) {
 
-        newTodo = {
-            todo: todo,
-            completed: false,
-            id: this.addTodoCounter
+            let li = document.createElement('li');
+            ul.appendChild(li);
+
+            newTodo = {
+                todo: todo,
+                completed: false,
+                id: this.addTodoCounter
+            }
+
+            this.addTodoCounter++;
+            this.todos.push(newTodo);
+            li.innerText = todo;
         }
-
-        this.addTodoCounter++;
-        this.todos.push(newTodo);
-        li.innerText = todo;
     },
     
     displayTodos: function(todo) {

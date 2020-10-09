@@ -10,35 +10,36 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <div>
-            <h1>My Todos:</h1>
-        </div>
-        <div>
-            <ul id="todoList">
-            </ul>
-        </div>
-            
-        <div>
-            <input id="newTodo" placeholder="Enter a todo..."type="text">
-            <button id="addTodoButton" class="buttons" onclick="handlers.addTodoListener()">Add Todo</button>
-        </div>
-        <div>
-            <input id="changeTodoText" placeholder="Enter new todo here..."type="text">
-            <button id="changeTodoButton" class="buttons" onclick="handlers.changeTodoListener()">Change Todo</button>
-        </div>
-        <div>
-            <input id="changeTodoPosition" placeholder="Enter todo position..."type="text">
-        </div>
+        <div id="container">
+            <div>
+                <h1>My Todos:</h1>
+            </div>
+            <div>
+                <ul id="todoList">
+                </ul>
+            </div>
+            <div id="eventItems">    
+                <div>
+                    <input id="newTodo" placeholder="Enter a todo..."type="text">
+                    <button id="addTodoButton" class="buttons" onclick="handlers.addTodoListener()">Add Todo</button>
+                </div>
+                <div>
+                    <input id="changeTodoText" placeholder="Enter new todo here..."type="text">
+                    <button id="changeTodoButton" class="buttons" onclick="handlers.changeTodoListener()">Change Todo</button>
+                </div>
+                <div>
+                    <input id="changeTodoPosition" placeholder="Enter todo position..."type="text">
+                </div>
 
-        <div>
-            <input id="deleteTodoInput" placeholder="Enter a todo position..."type="text">
-            <button id="deleteTodoButton" class="buttons" onclick="handlers.deleteTodoListener()">Delete Todo</button>
-        </div>
+                <div>
+                    <input id="deleteTodoInput" placeholder="Enter a todo position..."type="text">
+                    <button id="deleteTodoButton" class="buttons" onclick="handlers.deleteTodoListener()">Delete Todo</button>
+                </div>
+            </div>
+            <div>
 
-        <div>
-
-        </div>
-        
+            </div>
+        </div>  
         
         <script src="app.js" async defer></script>
     </body>
