@@ -1,13 +1,14 @@
+let ul = document.getElementById('todoList');
 
 
-var todoList = {
+
+let todoList = {
 
     todos: [],
     addTodoCounter: 0,
 
     addTodo: function(todo) {
-        var ul = document.getElementById('todoList');
-        var li = document.createElement('li');
+        let li = document.createElement('li');
         ul.appendChild(li);
 
         newTodo = {
@@ -19,7 +20,6 @@ var todoList = {
         this.addTodoCounter++;
         this.todos.push(newTodo);
         li.innerText = todo;
-        
     },
     
     displayTodos: function(todo) {
@@ -30,31 +30,49 @@ var todoList = {
         
     },
 
-    changeTodo: function(position, todo) {
-        this.todos[position].todo = todo;
-        this.displayTodos(todo);
+    changeTodo: function(position, todoText) {
+        this.todos[position].todo = todoText;
+        ul.childNodes[position].textContent = todoText;
     },
 
     deleteTodo: function(position) {
         this.todos.splice(position, 1)
-        this.displayTodos();
+        ul.childNodes[position].remove();
     },
 
     toggleTodo: function(position) {
         this.todos[position].completed = !this.todos[position].completed; 
+
     }
     
 
 };
 
-var handlers = {
+let handlers = {
 
     addTodoListener: function() {
-        var addTodoButton = document.getElementById('addTodoButton');
-        var addTodoInput = document.getElementById('newTodo').value;
+        let addTodoButton = document.getElementById('addTodoButton');
+        let addTodoInput = document.getElementById('newTodo').value;
         addTodoButton.addEventListener('onclick', function(todo) {
-            todoList.addTodo(addTodoInput);
         })
+        todoList.addTodo(addTodoInput);
+        document.getElementById('newTodo').value = '';
+    },
+
+    changeTodoListener: function() {
+        let changeTodoText = document.getElementById('changeTodoText').value;
+        let changeTodoPosition = parseInt(document.getElementById('changeTodoPosition').value);
+        todoList.changeTodo(changeTodoPosition, changeTodoText)
+        document.getElementById('changeTodoText').value = '';
+        document.getElementById('changeTodoPosition').value = '';
+    },
+
+    deleteTodoListener: function() {
+        var todoToDelete = document.getElementById('deleteTodoButton');
+        var todoPosition = parseInt(document.getElementById('deleteTodoInput').value);
+        todoToDelete.addEventListener('onclick', function() {
+        })
+        todoList.deleteTodo(todoPosition);
     }
     
 
