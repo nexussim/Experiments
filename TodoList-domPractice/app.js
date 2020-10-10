@@ -34,7 +34,7 @@ let todoList = {
     },
 
     changeTodo: function(position, todoText) {
-        this.todos[position].todo = todoText;
+        this.todos[position - 1].todo = todoText;
         ul.childNodes[position].textContent = todoText;
     },
 
@@ -53,16 +53,13 @@ let todoList = {
 
 let handlers = {
 
-    addTodoListener: function() {
-        let addTodoButton = document.getElementById('addTodoButton');
+    addTodoListener: function(e) {
         let addTodoInput = document.getElementById('newTodo').value;
-        addTodoButton.addEventListener('onclick', function(todo) {
-        })
         todoList.addTodo(addTodoInput);
         document.getElementById('newTodo').value = '';
     },
 
-    changeTodoListener: function() {
+    changeTodoListener: function(e) {
         let changeTodoText = document.getElementById('changeTodoText').value;
         let changeTodoPosition = parseInt(document.getElementById('changeTodoPosition').value);
         todoList.changeTodo(changeTodoPosition, changeTodoText)
@@ -71,10 +68,7 @@ let handlers = {
     },
 
     deleteTodoListener: function() {
-        var todoToDelete = document.getElementById('deleteTodoButton');
         var todoPosition = parseInt(document.getElementById('deleteTodoInput').value);
-        todoToDelete.addEventListener('onclick', function() {
-        })
         todoList.deleteTodo(todoPosition);
     }
     
