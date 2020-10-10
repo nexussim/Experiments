@@ -22,6 +22,13 @@ let todoList = {
             this.addTodoCounter++;
             this.todos.push(newTodo);
             li.innerText = todo;
+            li.setAttribute('id', this.addTodoCounter);
+            let div = document.createElement('div');
+            let deleteMarker = document.createElement('button');
+            li.appendChild(div);
+            div.appendChild(deleteMarker);
+            deleteMarker.innerText = 'X';
+            deleteMarker.id = todo;
         }
     },
     
@@ -40,7 +47,7 @@ let todoList = {
 
     deleteTodo: function(position) {
         this.todos.splice(position, 1)
-        ul.childNodes[position].remove();
+        ul.childNodes[position + 1].remove();
     },
 
     toggleTodo: function(position) {
@@ -67,13 +74,18 @@ let handlers = {
         document.getElementById('changeTodoPosition').value = '';
     },
 
-    deleteTodoListener: function() {
-        var todoPosition = parseInt(document.getElementById('deleteTodoInput').value);
-        todoList.deleteTodo(todoPosition);
+    deleteTodoListener: function(event) {
+        let todos = todoList.todos;
+        const clickEvent = event.target;
+        for (var i = 0; i < todos.length; i++) {
+            if (todos[i].todo === clickEvent.id) {
+                todoList.deleteTodo(i);
+            }
+        } 
     }
-    
-
 }
+
+
 
 
 todoList.addTodo('first');

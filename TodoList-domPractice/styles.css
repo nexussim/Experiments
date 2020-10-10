@@ -87,6 +87,14 @@ input::placeholder{
     border-radius: 40px;
 }
 
+label {
+    display: inline;
+}
 
+#todo {
+    border-radius: 30px;
+}
 
-
+button {
+    border-radius: 50%;
+}
