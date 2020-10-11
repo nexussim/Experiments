@@ -31,14 +31,6 @@ let todoList = {
             deleteMarker.id = todo;
         }
     },
-    
-    displayTodos: function(todo) {
-        // console.log('My Todos:')
-        // this.todos.forEach(function(todo) {
-        //     console.log(todo);
-        // });
-        
-    },
 
     changeTodo: function(position, todoText) {
         this.todos[position - 1].todo = todoText;
@@ -50,12 +42,16 @@ let todoList = {
         ul.childNodes[position + 1].remove();
     },
 
-    toggleTodo: function(position) {
+    toggleTodo: function(event, position) {
         this.todos[position].completed = !this.todos[position].completed; 
-
+        
+        let toggleClickEvent = event.target;
+        if (this.todos[position].completed === true) {
+            toggleClickEvent.style.textDecoration = 'line-through';
+        } else {
+            toggleClickEvent.style.textDecoration = '';
+        }
     }
-    
-
 };
 
 let handlers = {
@@ -76,34 +72,34 @@ let handlers = {
 
     deleteTodoListener: function(event) {
         let todos = todoList.todos;
-        const clickEvent = event.target;
+        const deleteClickEvent = event.target;
         for (var i = 0; i < todos.length; i++) {
-            if (todos[i].todo === clickEvent.id) {
+            if (todos[i].todo === deleteClickEvent.id) {
                 todoList.deleteTodo(i);
             }
         } 
+    },
+
+    toggleCompletedListener: function(event) {
+        let todos = todoList.todos;
+        let toggleClickEvent = event.target;
+        if (toggleClickEvent.tagName === 'LI') {
+            for (var i = 0; i < todos.length; i++) {
+                var tempTodo = todos[i].todo.concat('','X')
+                if (tempTodo === toggleClickEvent.textContent) {
+                   todoList.toggleTodo(event, i);
+                }
+            } 
+        }
     }
 }
 
 
 
 
-todoList.addTodo('first');
-todoList.addTodo('second');
-todoList.addTodo('third');
-
-
-
-
-
-
-// addTodo('first')
-// addTodo('second')
-// addTodo('third')
-// addTodo('fourth')
-// changeTodo(1, 'CHANGED')
-// toggleCompleted(1)
-// displayTodos();
+todoList.addTodo('First');
+todoList.addTodo('Second');
+todoList.addTodo('Third');
 
 
 

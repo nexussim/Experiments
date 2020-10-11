@@ -14,7 +14,7 @@
             <div>
                 <h1>My Todos:</h1>
             </div>
-            <div>
+            <div onclick="handlers.toggleCompletedListener(event)">
                 <ul id="todoList" onclick="handlers.deleteTodoListener(event)">
                 </ul>
             </div>
@@ -34,7 +34,9 @@
                 <div>
                     <input id="changeTodoPosition" placeholder="Enter todo position..."type="text">
                 </div>
-
+                <div>
+                    <p>Click a todo to toggle completed.</p>
+                </div>
             
             <div>
 
