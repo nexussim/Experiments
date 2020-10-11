@@ -12,7 +12,7 @@ body {
     background: #151515;
     font-size: 20px;
     color: white;
-    font-family: Apple Chancery, cursive;
+    font-family: Apple Chancery;
 }
 
 ul {
@@ -31,6 +31,7 @@ li {
     -moz-user-select: none; 
     -ms-user-select: none;
     list-style-type: none;
+    max-width: 550px;
     text-align: center;
     text-shadow: 2px 2px 4px #000000;
 }
@@ -46,7 +47,7 @@ li {
     min-width: 100px;
     color: white;
     text-shadow: 2px 2px 4px #000000;
-    font-family: Apple Chancery, cursive;
+    font-family: Apple Chancery;
 }
 
 .buttons:hover {
