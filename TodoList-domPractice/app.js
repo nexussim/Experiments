@@ -99,6 +99,18 @@ let handlers = {
                 }
             } 
         }
+    },
+
+    clearCompletedListener(event) {
+        let todos = todoList.todos;
+        let todoElements = ul.childNodes;
+        for (var i = 0; i < todos.length; i++) {
+            if (todos[i].completed === true) {
+                if (todos[i].id === parseInt(todoElements[i + 1].id)) {
+                    todoList.deleteTodo(i);
+                }
+            }
+        }
     }
 }
 
