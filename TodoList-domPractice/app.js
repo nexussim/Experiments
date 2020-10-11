@@ -22,19 +22,27 @@ let todoList = {
             this.addTodoCounter++;
             this.todos.push(newTodo);
             li.innerText = todo;
-            li.setAttribute('id', this.addTodoCounter);
+            li.setAttribute('id', newTodo.id);
             let div = document.createElement('div');
             let deleteMarker = document.createElement('button');
             li.appendChild(div);
             div.appendChild(deleteMarker);
             deleteMarker.innerText = 'X';
             deleteMarker.id = todo;
+            deleteMarker.classList.add("deleteButton");
         }
     },
 
     changeTodo: function(position, todoText) {
         this.todos[position - 1].todo = todoText;
         ul.childNodes[position].textContent = todoText;
+        let div = document.createElement('div');
+            let deleteMarker = document.createElement('button');
+            ul.childNodes[position].appendChild(div);
+            div.appendChild(deleteMarker);
+            deleteMarker.innerText = 'X';
+            deleteMarker.id = todoText;
+            deleteMarker.classList.add("deleteButton");
     },
 
     deleteTodo: function(position) {
