@@ -28,12 +28,13 @@ let todoList = {
             li.appendChild(div);
             div.appendChild(deleteMarker);
             deleteMarker.innerText = 'X';
-            deleteMarker.id = todo;
+            deleteMarker.id = newTodo.id;
             deleteMarker.classList.add("deleteButton");
         }
     },
 
     changeTodo: function(position, todoText) {
+        let currentTodoId = this.todos[position - 1].id
         this.todos[position - 1].todo = todoText;
         ul.childNodes[position].textContent = todoText;
         let div = document.createElement('div');
@@ -41,13 +42,14 @@ let todoList = {
             ul.childNodes[position].appendChild(div);
             div.appendChild(deleteMarker);
             deleteMarker.innerText = 'X';
-            deleteMarker.id = todoText;
+            deleteMarker.id = currentTodoId;
             deleteMarker.classList.add("deleteButton");
     },
 
     deleteTodo: function(position) {
-        this.todos.splice(position, 1)
-        ul.childNodes[position + 1].remove();
+        let todos = todoList.todos;
+            this.todos.splice(position, 1)
+            ul.childNodes[position + 1].remove();
     },
 
     toggleTodo: function(event, position) {
@@ -81,11 +83,13 @@ let handlers = {
     deleteTodoListener: function(event) {
         let todos = todoList.todos;
         const deleteClickEvent = event.target;
-        for (var i = 0; i < todos.length; i++) {
-            if (todos[i].todo === deleteClickEvent.id) {
-                todoList.deleteTodo(i);
-            }
-        } 
+        if (deleteClickEvent.className === 'deleteButton') {
+            for (var i = 0; i < todos.length; i++) {
+                if (todos[i].id === parseInt(deleteClickEvent.id)) {
+                    todoList.deleteTodo(i);
+                }
+            } 
+        }
     },
 
     toggleCompletedListener: function(event) {
@@ -104,10 +108,11 @@ let handlers = {
     clearCompletedListener(event) {
         let todos = todoList.todos;
         let todoElements = ul.childNodes;
-        for (var i = 0; i < todos.length; i++) {
-            if (todos[i].completed === true) {
+        for (var i = todos.length - 1; i >= 0; i--) {
+            if (todos[i].completed) {
                 if (todos[i].id === parseInt(todoElements[i + 1].id)) {
-                    todoList.deleteTodo(i);
+                    todos.splice(i, 1);
+                    ul.childNodes[i + 1].remove();
                 }
             }
         }
