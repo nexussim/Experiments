@@ -52,7 +52,7 @@ let todoList = {
             ul.childNodes[position + 1].remove();
     },
 
-    toggleTodo: function(event, position) {
+    toggleCompleted: function(event, position) {
         this.todos[position].completed = !this.todos[position].completed; 
         
         let toggleClickEvent = event.target;
@@ -61,30 +61,48 @@ let todoList = {
         } else {
             toggleClickEvent.style.textDecoration = '';
         }
+    },
+
+    toggleAllCompleted() {
+
+
     }
 };
 
 let handlers = {
 
-    addTodoListener: function(e) {
-        let addTodoInput = document.getElementById('newTodo').value;
-        todoList.addTodo(addTodoInput);
-        document.getElementById('newTodo').value = '';
+    addTodoListener: function(event) {
+        if (event.keyCode === 13 || event.type === 'click') {
+            let addTodoInput = document.getElementById('newTodo').value;
+            todoList.addTodo(addTodoInput);
+            document.getElementById('newTodo').value = '';
+        }
+        
     },
 
     changeTodoListener: function(e) {
         let changeTodoText = document.getElementById('changeTodoText').value;
         let changeTodoPosition = parseInt(document.getElementById('changeTodoPosition').value);
-        todoList.changeTodo(changeTodoPosition, changeTodoText)
-        document.getElementById('changeTodoText').value = '';
-        document.getElementById('changeTodoPosition').value = '';
+        if (changeTodoText && changeTodoPosition) {
+            todoList.changeTodo(changeTodoPosition, changeTodoText)
+            document.getElementById('changeTodoText').value = '';
+            document.getElementById('changeTodoPosition').value = '';
+            var alertText = document.getElementById('alertText');
+            alertText.textContent = "";
+        } else {
+            document.getElementById('changeTodoPosition').value = '';
+            var alertText = document.getElementById('alertText');
+            alertText.textContent = "※ Please enter a number..."
+            return;
+        }
+        
     },
 
     deleteTodoListener: function(event) {
         let todos = todoList.todos;
         const deleteClickEvent = event.target;
         if (deleteClickEvent.className === 'deleteButton') {
-            for (var i = 0; i < todos.length; i++) {
+            for (let i = 0; i < todos.length; i++) {
                 if (todos[i].id === parseInt(deleteClickEvent.id)) {
                     todoList.deleteTodo(i);
                 }
@@ -96,10 +114,10 @@ let handlers = {
         let todos = todoList.todos;
         let toggleClickEvent = event.target;
         if (toggleClickEvent.tagName === 'LI') {
-            for (var i = 0; i < todos.length; i++) {
-                var tempTodo = todos[i].todo.concat('','X')
+            for (let i = 0; i < todos.length; i++) {
+                let tempTodo = todos[i].todo.concat('','X')
                 if (tempTodo === toggleClickEvent.textContent) {
-                   todoList.toggleTodo(event, i);
+                   todoList.toggleCompleted(event, i);
                 }
             } 
         }
@@ -108,7 +126,7 @@ let handlers = {
     clearCompletedListener(event) {
         let todos = todoList.todos;
         let todoElements = ul.childNodes;
-        for (var i = todos.length - 1; i >= 0; i--) {
+        for (let i = todos.length - 1; i >= 0; i--) {
             if (todos[i].completed) {
                 if (todos[i].id === parseInt(todoElements[i + 1].id)) {
                     todos.splice(i, 1);

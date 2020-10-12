@@ -20,19 +20,22 @@
             </div>
            
                 <div>
-                    <button id="addTodoButton" class="buttons" onclick="handlers.addTodoListener()">Add Todo</button>
+                    <button id="addTodoButton" class="buttons" onclick="handlers.addTodoListener(event)">Add Todo</button>
                 </div>
                 <div>
-                    <input id="newTodo" placeholder="Enter a todo..."type="text">
+                    <input id="newTodo" placeholder="Enter a todo..."type="text" autofocus onkeyup="handlers.addTodoListener(event)">
                 </div>
                 <div>
                     <button id="changeTodoButton" class="buttons" onclick="handlers.changeTodoListener()">Change Todo</button>
                 </div>
                 <div>
-                    <input id="changeTodoText" placeholder="Enter new todo here..."type="text">
+                    <input id="changeTodoText" placeholder="Enter new todo ..."type="text">
                 </div>
                 <div>
                     <input id="changeTodoPosition" placeholder="Enter todo position..."type="text">
+                    <div>
+                        <h3 id="alertText"></h3>
+                    </div>
                 </div>
                 <div>
                     <p>Click a todo to mark as complete.</p>
